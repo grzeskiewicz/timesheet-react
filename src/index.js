@@ -1,12 +1,64 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './css/index.css';
+import { Login, Logout } from './UserAuth';
 import reportWebVitals from './reportWebVitals';
+import AdminPanel from './AdminPanel';
+import UserPanel from './UserPanel';
+import { authServices } from './Services';
+
+
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { email: '', id: '', role: '', authorised: false }
+
+    this.authorised = this.authorised.bind(this);
+    this.notAuthorised = this.notAuthorised.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+
+  componentDidMount() {
+    authServices.getInfo().then(res => {
+      console.log(res);
+    });
+  }
+
+  authorised(email, role, id) {
+    this.setState({ authorised: true, role: role, email: email, id: id });
+  }
+
+  notAuthorised() {
+    this.setState({ authorised: false, email: '', role: '', id: '' }); // anything more?
+  }
+
+  logout() {
+    this.setState({ email: '', role: '', authorised: false, id: '' });
+  }
+
+
+
+  render() {
+    console.log(this.state);
+    return (
+      <div id="board">
+        {!this.state.authorised ?
+          <Login authorised={this.authorised} notAuthorised={this.notAuthorised} />
+          :
+          <Logout email={this.state.email} logout={this.logout} />
+        }
+        {this.state.authorised ? (this.state.role === 1 ? <AdminPanel></AdminPanel> : <UserPanel user={this.state.id}></UserPanel>) : ''}
+
+      </div >
+    );
+  }
+
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Board />
   </React.StrictMode>,
   document.getElementById('root')
 );

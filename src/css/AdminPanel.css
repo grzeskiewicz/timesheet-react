@@ -1,0 +1,14 @@
+.AdminPanel {
+  display: flex;
+}
+
+.AdminPanel form {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+
+.container{
+    display: flex;
+    flex-flow: column nowrap;   
+}

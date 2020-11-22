@@ -1,0 +1,28 @@
+.UserPanel {
+  display: flex;
+  flex: 1 100%;
+  justify-content: center;
+}
+.UserPanel table {
+  width: 50%;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: auto;
+}
+
+
+.UserPanel table td, .UserPanel table th{
+    border: 1px solid;
+    padding:0.2rem;
+}
+
+.DayRecord.weekend, .DayRecord.ph{
+  background-color: lightsteelblue;
+}
+
+
+.DayRecord.selected{
+border:3px solid black;
+}
+

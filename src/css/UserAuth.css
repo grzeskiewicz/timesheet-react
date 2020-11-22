@@ -1,0 +1,39 @@
+#userinfo {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  border-bottom: 1px solid gray;
+}
+
+#user-smallmenu {
+  position: fixed;
+  top: 5%;
+  border: 1px solid gray;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#user-smallmenu button {
+  flex: 1 100%;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+.login {
+height:100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.login form {
+  flex: 0 30%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+
+.login form > * {
+    flex:0 5%;
+}

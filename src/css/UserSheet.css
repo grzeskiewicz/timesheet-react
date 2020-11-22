@@ -1,0 +1,18 @@
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: auto;
+  width:20%;
+}
+
+table td,
+table th {
+  border: 1px solid;
+  padding: 0.2rem;
+}
+
+.weekend,
+.ph {
+  background-color: lightsteelblue;
+}
