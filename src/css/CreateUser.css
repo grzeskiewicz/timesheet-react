@@ -1,0 +1,20 @@
+.wrapper{
+  display: flex;
+  flex:0 50%;
+  justify-content: center;
+}
+.createUser {
+    display: flex;
+    flex-flow: column nowrap;
+    flex:0 20%;
+    justify-content: space-around;
+  }
+
+  .createUser > * {
+    flex:0 10%;
+  }
+  
+
+.createUser select{
+  
+}

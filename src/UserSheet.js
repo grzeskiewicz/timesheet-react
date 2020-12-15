@@ -1,24 +1,32 @@
 import React from 'react';
 import './css/UserSheet.css';
-
-import { getUserSheet } from './SheetUtils'
+import Summary from './Summary';
+import { getUserSheet, MONTH_LIST } from './SheetUtils'
 
 class UserSheet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sheet: ''
+            sheet: '',
+            grouped: '',
+            selectedMonth: new Date().getMonth() + 1,
         }
+        this.handleMonthSelection = this.handleMonthSelection.bind(this);
     }
 
     componentDidMount() {
+        this.updateSheet();
+    }
+
+
+    updateSheet(month) {
         const user = {
             id: this.props.user.id,
-            month: 11
+            month: month || this.state.selectedMonth
         }
         getUserSheet(user).then(result => {
             console.log(result);
-            this.setState(result);
+            this.setState({ grouped: result.grouped, sheet: result.sheet, selectedMonth: user.month, summary: result.summary });
         });
     }
 
@@ -38,15 +46,37 @@ class UserSheet extends React.Component {
         }
     }
 
+    renderMonths() {
+        return MONTH_LIST.map((month, index) => {
+            return <option key={index + 1} value={index + 1}>{month}</option>
+        });
+    }
+
+    handleMonthSelection(e) {
+        this.updateSheet(e.target.value);
+    }
+
     render() {
+        console.log(this.props.user);
         const sheet = this.renderSheet();
+        const renderMonths = this.renderMonths();
         return (
-            <table>
-                <thead><tr><td>Dzień</td><td>Od</td><td>Do</td></tr></thead>
-                <tbody>
-                    {sheet}
-                </tbody>
-            </table>
+            <div className={"userSheet" + (this.props.user.role === 3 ? " admin" : " user")}>
+                <select id="month-selection" onChange={this.handleMonthSelection} value={this.state.selectedMonth}>
+                    {renderMonths}
+                </select>
+                <table>
+                    <thead>
+                        <tr>
+                        </tr>
+                        <tr><td>Dzień</td><td>Od</td><td>Do</td></tr>
+                    </thead>
+                    <tbody>
+                        {sheet}
+                    </tbody>
+                </table>
+                {this.state.grouped !== '' ? <Summary user={this.props.user} summary={this.state.summary} data={this.state.grouped}></Summary> : ''}
+            </div>
         );
     }
 }

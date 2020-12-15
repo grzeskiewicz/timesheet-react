@@ -1,0 +1,11 @@
+.editUser {
+  display: flex;
+  flex-flow: column nowrap;
+  flex:0 20%;
+  
+}
+
+.editUser > * {
+  flex:0 4%;
+  margin-bottom: 0.6rem;
+}

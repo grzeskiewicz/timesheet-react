@@ -9,19 +9,22 @@ class CreateSheets extends React.Component {
     }
 
     createSheets() {
-        console.log("hehe");
-        fetch(request(`${API_URL}/createsheets`, 'POST', { month: 11 }))
+        fetch(request(`${API_URL}/createsheets`, 'POST', { month: new Date().getMonth() + 1 }))
             .then(res => res.json())
             .then(result => {
-                if (result.success) alert("Listy utworzone");
-            }).catch(error => Promise.reject(new Error(error))); //Promise.reject(new Error(error))       
-
+                if (result.success) {
+                    fetch(request(`${API_URL}/createsummaries`, 'POST', { updateallusers: true }))
+                        .then(res => res.json())
+                        .then(result2 => {
+                            if (result2.success) alert("Listy na obecny miesiąć utworzone!")
+                        }).catch(error => Promise.reject(new Error(error)));
+                }
+            }).catch(error => Promise.reject(new Error(error))); //Promise.reject(new Error(error))
     }
-
 
     render() {
         return (
-            <div><button onClick={this.createSheets}>Stwórz listy</button></div>
+            <li onClick={this.createSheets}>Stwórz listy</li>
         );
     }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { API_URL, request } from './apiConnection.js';
 import UserForm from './UserForm';
+import './css/EditUser.css';
+
 
 
 class EditUser extends React.Component {
@@ -10,23 +12,26 @@ class EditUser extends React.Component {
     }
 
     userToEdit(user) {
-        console.log(user);
+        if (user.password !== undefined) {
+            const passwordReset = window.confirm("Do you really want to reset password for this user?");
+            if (!passwordReset) return;
+        }
+
         fetch(request(`${API_URL}/edituser`, 'POST', user))
             .then(res => res.json())
             .then(result => {
                 if (result.success) {
                     this.props.updateSelectedUser()
-                    alert("User updated");
+                    alert("Dane użytkownika zaktualizowane.");
                 }
             }).catch(error => Promise.reject(new Error(error))); //Promise.reject(new Error(error))       
     }
 
 
     render() {
-        console.log(this.props.selectedUser);
         return (
-            <UserForm key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
-                <button type='submit'>Edit user</button>
+            <UserForm className="editUser" key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
+                <button type='submit'>Edytuj</button>
             </UserForm>
         );
     }

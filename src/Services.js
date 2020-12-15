@@ -36,7 +36,6 @@ export const authServices = {
     },
 
     login(user) { //token? JWT!
-        console.log(user);
         return fetch(request(`${API_URL}/login`, 'POST', user))
             .then(res => res.json())
             .then(result => {
@@ -52,7 +51,6 @@ export const authServices = {
         return fetch(request(`${API_URL}/userinfo`, 'GET'))
             .then(res => res.json())
             .then(result => {
-                //   console.log(result)
                 return result;
             });
     },

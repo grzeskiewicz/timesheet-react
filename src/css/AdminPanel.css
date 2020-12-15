@@ -1,14 +1,56 @@
 .AdminPanel {
   display: flex;
+  flex-flow: column;
+  height:100%;
 }
 
-.AdminPanel form {
+
+.AdminPanel .menu {
+  flex:0 6vh;
+}
+
+.AdminPanel .usersContainer {
+  flex:0 80vh;
+}
+.usersContainer {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
+  margin:0 3rem;
+}
+.usersContainer > * {
+  margin-right: 5rem;
 }
 
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+}
 
-.container{
-    display: flex;
-    flex-flow: column nowrap;   
+nav li {
+  color: white;
+  border-right: 1px solid #bbb;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+nav li:last-child {
+  margin-left: auto;
+  border-right: 0;
+}
+
+#userinfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.active {
+  background-color: mediumseagreen;
 }

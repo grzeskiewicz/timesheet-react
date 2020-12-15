@@ -1,10 +1,3 @@
-#userinfo {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
-  border-bottom: 1px solid gray;
-}
-
 #user-smallmenu {
   position: fixed;
   top: 5%;
@@ -27,7 +20,7 @@ height:100%;
 }
 
 .login form {
-  flex: 0 30%;
+  flex: 0 20%;
   display: flex;
   flex-flow: column;
   justify-content: center;

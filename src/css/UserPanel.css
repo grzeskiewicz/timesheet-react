@@ -1,7 +1,19 @@
 .UserPanel {
   display: flex;
   flex: 1 100%;
+  flex-flow: column nowrap;
   justify-content: center;
+}
+
+.UserPanel .container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+
+.UserPanel .container > * {
+  flex: 0 51%;
 }
 .UserPanel table {
   width: 50%;
@@ -11,18 +23,33 @@
   table-layout: auto;
 }
 
-
-.UserPanel table td, .UserPanel table th{
-    border: 1px solid;
-    padding:0.2rem;
+.UserPanel table td,
+.UserPanel table th {
+  border: 1px solid;
+  padding: 0.2rem;
 }
 
-.DayRecord.weekend, .DayRecord.ph{
+.UserPanel table tr {
+  cursor: pointer;
+}
+
+.DayRecord.weekend,
+.DayRecord.ph {
   background-color: lightsteelblue;
 }
 
-
-.DayRecord.selected{
-border:3px solid black;
+.DayRecord.selected {
+  border: 3px solid black;
 }
 
+#user-month-selection {
+  border: 1px solid black;
+}
+#user-month-selection td {
+  border: 0;
+}
+
+
+.menu{
+  margin-bottom: 1rem;
+}

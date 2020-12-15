@@ -97,12 +97,10 @@ class Logout extends React.Component {
         return (
             <div id="userinfo" ref={node => this.node = node}>
                 <p>{email}</p>
-                <FontAwesomeIcon onClick={(event) => this.toggleMenu(event)} icon={faUserCircle} size="3x" />
+                <FontAwesomeIcon className="fa" onClick={(event) => this.toggleMenu(event)} icon={faUserCircle} size="2x" />
                 {this.state.showMenu ?
                     <div id="user-smallmenu">
                         <button onClick={() => this.handleLogout()}>Logout</button>
-                        <button>test</button>
-                        <button>test2</button>
                     </div> : ''}
             </div>
         );

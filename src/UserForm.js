@@ -54,7 +54,7 @@ class UserForm extends React.Component {
         const emailPattern = /\w@\w*\.\w/g;
         let result = emailPattern.test(event.target.value);
         if (result === false && event.target.value.length < 6) result = true;
-        this.setState({ email: event.target.value, error: result ? '' : 'Wrong e-mail address!' }); //error: event.target.value.length > 4 && result ? '': 'Wrong e-mail address!'
+        this.setState({ email: event.target.value, error: result ? '' : 'Niepoprawny format e-mail!' }); //error: event.target.value.length > 4 && result ? '': 'Wrong e-mail address!'
     }
 
     handlePassword(event) {
@@ -77,6 +77,10 @@ class UserForm extends React.Component {
             deal: this.state.deal,
             role: this.state.role,
         };
+        if (this.state.error) {
+            alert('Wrong e-mail format!');
+            return;
+        }
         if (this.props.newUser !== undefined) this.props.newUser(user);
         if (this.props.userToEdit !== undefined) this.props.userToEdit(user);
 
@@ -123,7 +127,6 @@ class UserForm extends React.Component {
     }
 
     handleRole(e) {
-        console.log(e.target);
         this.setState({ role: e.target.value });
 
     }
@@ -139,13 +142,12 @@ class UserForm extends React.Component {
         if (this.state.deals !== '') mappedDeals = this.renderDealsSelection();
         if (this.state.roles !== '') mappedRoles = this.renderRolesSelection();
         const isUserEdit = this.props.userData !== undefined;
-        console.log(this.state.password);
         return (
-            <form onSubmit={this.submitForm}>
-                <input placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required={!isUserEdit}></input>
-                <input type="password" placeholder='Password' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input>
-                <input placeholder='Name' value={this.state.name} onChange={this.handleName} required={!isUserEdit}></input>
-                <input placeholder='Surname' value={this.state.surname} onChange={this.handleSurname} required={!isUserEdit}></input>
+            <form className={this.props.className} onSubmit={this.submitForm}>
+                <input placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
+                <input type="password" placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input>
+                <input placeholder='Imię' value={this.state.name} onChange={this.handleName} required></input>
+                <input placeholder='Nazwisko' value={this.state.surname} onChange={this.handleSurname} required></input>
                 <select onChange={this.handleRole} value={this.state.role}>
                     {mappedRoles}
                 </select>

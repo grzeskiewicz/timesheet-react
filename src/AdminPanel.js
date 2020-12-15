@@ -6,6 +6,7 @@ import CreateUser from './CreateUser';
 import EditUser from './EditUser';
 import CreateSheets from './CreateSheets';
 import UserSheet from './UserSheet';
+import SendEmails from './SendEmails';
 
 
 
@@ -15,10 +16,11 @@ class AdminPanel extends React.Component {
     this.state = {
       userList: '',
       selectedUser: '',
-      showCreateUser: false
+      showCreateUser: false,
+      selectedMenu: 1
     }
     this.showEdit = this.showEdit.bind(this);
-    this.updateSelectedUser = this.updateSelectedUser.bind(this);
+    this.getUserList = this.getUserList.bind(this);
   }
 
 
@@ -38,28 +40,33 @@ class AdminPanel extends React.Component {
     this.setState({ selectedUser: user })
   }
 
-  updateSelectedUser() {
-    this.getUserList();
+
+  showMenu(n) {
+    this.setState({ selectedMenu: n });
   }
-
-
-  createSheetsGivenMonth(month) {
-
-  }
-
 
 
   render() {
-    console.log(this.state.selectedUser);
+    console.log(new Date().getDate() < 10);
     return (
       <div className="AdminPanel" >
-        {this.state.userList !== '' ? <UserList userList={this.state.userList} showEdit={this.showEdit}></UserList> : ''}
-        {this.state.selectedUser !== '' ? <EditUser selectedUser={this.state.selectedUser} updateSelectedUser={this.updateSelectedUser}></EditUser> : ''}
-        {this.state.selectedUser !== '' ? <UserSheet key={this.state.selectedUser.id} user={this.state.selectedUser} /> : ''}
-        <div className="container">
-          {this.state.showCreateUser ? <CreateUser></CreateUser> : <button onClick={() => this.setState({ showCreateUser: !this.state.showCreateUser })}>Utwórz użytkownika</button>}
-          <CreateSheets />
-        </div>
+        <nav className="menu">
+          <ul>
+            <li onClick={() => this.setState({ selectedMenu: 1 })} className={this.state.selectedMenu === 1 ? 'active' : ''}>Pracownicy</li>
+            <li onClick={() => this.setState({ selectedMenu: 2 })} className={this.state.selectedMenu === 2 ? 'active' : ''}> + Dodaj pracownika</li>
+            {(this.props.role === 2 && new Date().getDate() < 10) || this.props.role === 1 ? <CreateSheets /> : ''}
+            <SendEmails />
+            <li>{this.props.logout}</li>
+          </ul>
+        </nav>
+        {this.state.selectedMenu === 1 ?
+          <div className="usersContainer">
+            {this.state.userList !== '' ? <UserList selectedUser={this.state.selectedUser} userList={this.state.userList} showEdit={this.showEdit}></UserList> : ''}
+            {this.state.selectedUser !== '' ? <UserSheet key={this.state.selectedUser.id} user={this.state.selectedUser} /> : ''}
+            {this.state.selectedUser !== '' && this.state.selectedUser.role !== 1 ? <EditUser selectedUser={this.state.selectedUser} updateSelectedUser={this.getUserList}></EditUser> : ''}
+          </div> : ''}
+
+        {this.state.selectedMenu === 2 ? <div className="wrapper"><CreateUser></CreateUser></div> : ''}
       </div>
     );
   }

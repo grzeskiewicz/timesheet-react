@@ -1,4 +1,6 @@
 import React from 'react';
+import './css/UserList.css';
+
 
 class UserList extends React.Component {
     constructor(props) {
@@ -6,12 +8,11 @@ class UserList extends React.Component {
         this.renderList = this.renderList.bind(this);
     }
     selectUser(user) {
-       // console.log(user);
         this.props.showEdit(user);
     }
 
     renderList() {
-        return this.props.userList.map((user, index) => <div key={index} onClick={()=>this.selectUser(user)} className="user">{user.name} {user.surname}</div>);
+        return this.props.userList.map((user, index) => <div key={index} onClick={() => this.selectUser(user)} className={"user" + (this.props.selectedUser.id === user.id ? " active" : "")}><p>{user.name} {user.surname}</p></div>);
     }
 
 
@@ -19,7 +20,7 @@ class UserList extends React.Component {
     render() {
         const userList = this.renderList();
         return (
-            <div>{userList}</div>
+            <div className="userList">{userList}</div>
         );
     }
 }

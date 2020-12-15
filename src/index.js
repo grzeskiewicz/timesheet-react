@@ -40,16 +40,13 @@ class Board extends React.Component {
 
 
   render() {
-    console.log(this.state);
     return (
       <div id="board">
         {!this.state.authorised ?
           <Login authorised={this.authorised} notAuthorised={this.notAuthorised} />
-          :
-          <Logout email={this.state.email} logout={this.logout} />
-        }
-        {this.state.authorised ? (this.state.role === 1 ? <AdminPanel></AdminPanel> : <UserPanel user={this.state.id}></UserPanel>) : ''}
-
+          : ((this.state.role === 1 || this.state.role === 2) ?
+            <AdminPanel role={this.state.role} logout={<Logout email={this.state.email} logout={this.logout} />}></AdminPanel> :
+            <UserPanel logout={<Logout email={this.state.email} logout={this.logout} />} user={this.state.id}></UserPanel>)}
       </div >
     );
   }

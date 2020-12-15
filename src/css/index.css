@@ -25,3 +25,41 @@ code {
 #board{
   height:100%;
 }
+
+
+
+
+/*
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+nav li:last-child {
+  border-right: none;
+}
+
+nav li  {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li :hover:not(.active) {
+  background-color: #111;
+}
+
+nav .active {
+  background-color: #4CAF50;
+} */
