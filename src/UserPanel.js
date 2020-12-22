@@ -12,6 +12,7 @@ class UserPanel extends React.Component {
       sheet: '',
       grouped: '',
       selectedMonth: new Date().getMonth() + 1,
+      selectedYear: new Date().getFullYear(),
       summary: ''
     }
     this.renderSheet = this.renderSheet.bind(this);
@@ -23,26 +24,38 @@ class UserPanel extends React.Component {
     this.updateSheet();
   }
 
-  updateSheet(month) {
+  updateSheet(month, year) {
     const user = {
       id: this.props.user,
-      month: month || this.state.selectedMonth
+      month: month || this.state.selectedMonth,
+      year: year || this.state.selectedYear
     }
     getUserSheet(user).then(result => {
-      console.log(result);
       this.setState({ grouped: result.grouped, sheet: result.sheet, selectedMonth: user.month, summary: result.summary });
     });
   }
 
 
   prevMonth() {
-    let month = this.state.selectedMonth;
-    this.updateSheet(--month);
+    let monthState = this.state.selectedMonth;
+    let yearState = this.state.selectedYear;
+    let month;
+    let year;
+    if (monthState === 1) {
+      month = 12;
+      year = --yearState;
+    } else {
+      month = --monthState;
+      year = null;
+    }
+
+    this.updateSheet(month, year);
   }
 
   currentMonth() {
     const month = new Date().getMonth() + 1;
-    this.updateSheet(month);
+    const year = new Date().getFullYear();
+    this.updateSheet(month,year);
   }
 
 
@@ -62,6 +75,7 @@ class UserPanel extends React.Component {
     const month = this.state.selectedMonth;
     const sheet = this.renderSheet(this.state.sheet);
     const maxDate = new Date(new Date().setDate(10));
+    console.log(month, this.state.selectedYear);
     return (
       <div className="UserPanel">
         <nav className="menu">

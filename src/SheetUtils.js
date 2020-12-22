@@ -22,7 +22,6 @@ export const getUserSheet = (user) => {
         .then(result2 => {
           const translated = translate(result);
           const grouped = groupByState(translated);
-          console.log({ sheet: translated, grouped: grouped, summary: result2 });
           return { sheet: translated, grouped: grouped, summary: result2 };
         }).catch(error => Promise.reject(new Error(error)));
     }).catch(error => Promise.reject(new Error(error)));

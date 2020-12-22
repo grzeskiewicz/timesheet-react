@@ -2,6 +2,7 @@
   flex: 0 30%;
   display: flex;
   flex-flow: column;
+  justify-content: flex-start;
 }
 
 .userSheet > * {
@@ -46,4 +47,23 @@ table th {
   height: 0;
   border: 6px solid transparent;
   border-color: #fff transparent transparent transparent;
+}
+
+
+#user-year-selection {
+  display: flex;
+  flex-flow:row nowrap;
+  justify-content: center;
+  border:1px solid #333;
+  font-size: 1.2rem;
+}
+
+#user-year-selection span {
+  cursor: pointer;
+}
+#user-year-selection p {
+  cursor: default;
+}
+#user-year-selection > *{
+margin:0 0.5rem;
 }
