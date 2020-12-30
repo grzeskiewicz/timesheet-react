@@ -52,9 +52,9 @@ class Login extends React.Component {
         return (
             <div className='login'>
                 <form onSubmit={this.handleLogin}>
-                    <input name='email' autoFocus placeholder='Your email' value={this.state.email} onChange={this.handleEmail} required></input>
-                    <input type='password' id='password' name='password' placeholder='Password' value={this.state.password} onChange={this.handlePassword} required></input>
-                    <button type='submit'>Login</button>
+                    <input name='email' autoFocus placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
+                    <input type='password' id='password' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required></input>
+                    <button type='submit'>Zaloguj</button>
                     <p>{this.state.loginErrorMsg}</p>
                 </form>
             </div>
@@ -100,7 +100,7 @@ class Logout extends React.Component {
                 <FontAwesomeIcon className="fa" onClick={(event) => this.toggleMenu(event)} icon={faUserCircle} size="2x" />
                 {this.state.showMenu ?
                     <div id="user-smallmenu">
-                        <button onClick={() => this.handleLogout()}>Logout</button>
+                        <button onClick={() => this.handleLogout()}>Wyloguj</button>
                     </div> : ''}
             </div>
         );
