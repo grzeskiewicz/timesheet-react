@@ -1,5 +1,5 @@
 .userSheet {
-  flex: 0 30%;
+  flex: 0 25%;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
@@ -22,8 +22,8 @@ table {
 
 table td,
 table th {
-  border: 1px solid;
-  padding: 0.2rem;
+  border: 1px solid #333;
+  padding: 0;
 }
 
 .weekend,
