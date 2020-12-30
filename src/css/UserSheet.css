@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
+  max-height: 80vh;
 }
 
 .userSheet > * {
@@ -11,6 +12,10 @@
 
 .userSheet .admin tr {
   cursor: default;
+}
+
+.userSheet.user {
+  border: none;
 }
 table {
   font-family: Arial, Helvetica, sans-serif;
@@ -30,15 +35,13 @@ table th {
   background-image: linear-gradient(180deg, lightsteelblue, green);
 }
 
-.weekend{
+.weekend {
   background-color: lightsteelblue;
 }
 
-.ph{
+.ph {
   background-color: green;
 }
-
-
 
 #month-selection {
   flex: 0 4vh;
@@ -58,12 +61,11 @@ table th {
   border-color: #fff transparent transparent transparent;
 }
 
-
 #user-year-selection {
   display: flex;
-  flex-flow:row nowrap;
+  flex-flow: row nowrap;
   justify-content: center;
-  border:1px solid #333;
+  border: 1px solid #333;
   font-size: 1.2rem;
 }
 
@@ -73,6 +75,6 @@ table th {
 #user-year-selection p {
   cursor: default;
 }
-#user-year-selection > *{
-margin:0 0.5rem;
+#user-year-selection > * {
+  margin: 0 0.5rem;
 }
