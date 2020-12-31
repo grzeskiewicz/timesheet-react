@@ -145,7 +145,7 @@ class UserForm extends React.Component {
         return (
             <form className={this.props.className} onSubmit={this.submitForm}>
                 <input placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
-                <input type="password" placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input>
+                {!isUserEdit ? <input type="password" placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input> : ''}
                 <input placeholder='Imię' value={this.state.name} onChange={this.handleName} required></input>
                 <input placeholder='Nazwisko' value={this.state.surname} onChange={this.handleSurname} required></input>
                 <select onChange={this.handleRole} value={this.state.role}>
