@@ -5,12 +5,18 @@ import './css/CreateUser.css';
 
 
 class CreateUser extends React.Component {
+    constructor(props) {
+        super(props);
+        this.newUser = this.newUser.bind(this);
+    }
     newUser(user) {
         fetch(request(`${API_URL}/createuser`, 'POST', user))
             .then(res => res.json())
             .then(result => {
                 console.log(result);
                 if (result.success) {
+                    this.props.updateUserList();
+                    console.log(this.props);
                     alert("Użytkownik utworzony.");
                 } else {
                     if (result.msg === "USER EXISTS") alert("Użytkownik o podanym adresie e-mail już istnieje!");

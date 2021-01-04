@@ -21,7 +21,7 @@ class EditUser extends React.Component {
             .then(res => res.json())
             .then(result => {
                 if (result.success) {
-                    this.props.updateSelectedUser()
+                    this.props.updateSelectedUser();
                     alert("Dane użytkownika zaktualizowane.");
                 }
             }).catch(error => Promise.reject(new Error(error))); //Promise.reject(new Error(error))       

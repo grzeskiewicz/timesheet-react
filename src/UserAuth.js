@@ -55,6 +55,7 @@ class Login extends React.Component {
                     <input name='email' autoFocus placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
                     <input type='password' id='password' name='password' placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required></input>
                     <button type='submit'>Zaloguj</button>
+                    <p>Reset hasła</p>
                     <p>{this.state.loginErrorMsg}</p>
                 </form>
             </div>

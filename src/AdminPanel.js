@@ -66,7 +66,7 @@ class AdminPanel extends React.Component {
             {this.state.selectedUser !== '' && this.state.selectedUser.role !== 1 ? <EditUser selectedUser={this.state.selectedUser} updateSelectedUser={this.getUserList}></EditUser> : ''}
           </div> : ''}
 
-        {this.state.selectedMenu === 2 ? <div className="wrapper"><CreateUser></CreateUser></div> : ''}
+        {this.state.selectedMenu === 2 ? <div className="wrapper"><CreateUser updateUserList={this.getUserList}></CreateUser></div> : ''}
       </div>
     );
   }
