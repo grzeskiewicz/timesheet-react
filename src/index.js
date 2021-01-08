@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './css/index.css';
 import { Login, Logout } from './UserAuth';
 import reportWebVitals from './reportWebVitals';
@@ -41,6 +42,7 @@ class Board extends React.Component {
 
   render() {
     return (
+
       <div id="board">
         {!this.state.authorised ?
           <Login authorised={this.authorised} notAuthorised={this.notAuthorised} />

@@ -13,14 +13,15 @@
 }
 
 .login {
-height:100%;
+  height: 100%;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   justify-content: center;
+  align-items: center;
 }
 
 .login form {
-  flex: 0 20%;
+  flex: 1 100%;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -29,4 +30,13 @@ height:100%;
 
 .login form > * {
     flex:0 5%;
+}
+
+.passwordResetDiv{
+  flex:1 70%;
+}
+#password-reset{
+  color:blue;
+  cursor: pointer;
+  flex:0;
 }

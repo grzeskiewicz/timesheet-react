@@ -21,6 +21,7 @@ class AdminPanel extends React.Component {
     }
     this.showEdit = this.showEdit.bind(this);
     this.getUserList = this.getUserList.bind(this);
+    this.clearSelectedUser = this.clearSelectedUser.bind(this);
   }
 
 
@@ -45,6 +46,10 @@ class AdminPanel extends React.Component {
     this.setState({ selectedMenu: n });
   }
 
+  clearSelectedUser() {
+    this.setState({ selectedUser: '' });
+    this.getUserList();
+  }
 
   render() {
     console.log(new Date().getDate() < 10);
@@ -63,7 +68,7 @@ class AdminPanel extends React.Component {
           <div className="usersContainer">
             {this.state.userList !== '' ? <UserList selectedUser={this.state.selectedUser} userList={this.state.userList} showEdit={this.showEdit}></UserList> : ''}
             {this.state.selectedUser !== '' ? <UserSheet key={this.state.selectedUser.id} user={this.state.selectedUser} /> : ''}
-            {this.state.selectedUser !== '' && this.state.selectedUser.role !== 1 ? <EditUser selectedUser={this.state.selectedUser} updateSelectedUser={this.getUserList}></EditUser> : ''}
+            {this.state.selectedUser !== '' && this.state.selectedUser.role !== 1 ? <EditUser clearSelectedUser={this.clearSelectedUser} selectedUser={this.state.selectedUser} updateSelectedUser={this.getUserList}></EditUser> : ''}
           </div> : ''}
 
         {this.state.selectedMenu === 2 ? <div className="wrapper"><CreateUser updateUserList={this.getUserList}></CreateUser></div> : ''}

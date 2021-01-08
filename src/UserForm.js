@@ -70,6 +70,7 @@ class UserForm extends React.Component {
     submitForm(event) {
         event.preventDefault();
         const user = {
+            id: this.props.userData !== undefined ? this.props.userData.id : null,
             name: this.state.name,
             surname: this.state.surname,
             email: this.state.email,
