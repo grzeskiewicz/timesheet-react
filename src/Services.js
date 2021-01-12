@@ -8,6 +8,7 @@ export const authServices = {
 
     loadUserCredentials() {
         var token = window.localStorage.getItem(this.LOCAL_TOKEN_KEY);
+        console.log(token);
         if (token) {
             this.useCredentials(token);
         }
@@ -23,15 +24,12 @@ export const authServices = {
         this.authToken = token;
         headers.delete('Authorization');
         headers.append('Authorization', this.authToken);
-        // Set the token as header for your requests!
-        //$http.defaults.headers.common.Authorization = authToken;
     },
 
     destroyUserCredentials() {
         this.authToken = undefined;
         this.isAuthenticated = false;
         headers.delete('Authorization');
-        // $http.defaults.headers.common.Authorization = undefined; //!!!!
         window.localStorage.removeItem(this.LOCAL_TOKEN_KEY);
     },
 
@@ -50,9 +48,7 @@ export const authServices = {
     getInfo() {
         return fetch(request(`${API_URL}/userinfo`, 'GET'))
             .then(res => res.json())
-            .then(result => {
-                return result;
-            });
+            .then(result => result);
     },
 
     getUsers() {

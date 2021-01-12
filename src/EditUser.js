@@ -66,7 +66,7 @@ class EditUser extends React.Component {
     render() {
         return (
             <div>
-                <UserForm className="editUser" key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
+                <UserForm myRole={this.props.myRole} className="editUser" key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
                     <button type='submit'>Edytuj</button>
                 </UserForm>
                 <button onClick={this.deleteUser}>Usuń użytkownika</button>

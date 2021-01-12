@@ -29,7 +29,7 @@ class CreateUser extends React.Component {
 
     render() {
         return (
-            <UserForm className="createUser" newUser={this.newUser}>
+            <UserForm myRole={this.props.myRole} className="createUser" newUser={this.newUser}>
                 <button type='submit'>Utwórz użytkownika</button>
             </UserForm>
         );

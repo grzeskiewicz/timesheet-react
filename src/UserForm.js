@@ -123,7 +123,14 @@ class UserForm extends React.Component {
 
     renderRolesSelection() {
         return this.state.roles.map((role, index) => {
-            return <option key={index} value={role.id} id={role.id}>{role.id} - {role.role}</option>
+            if (this.props.myRole === 1) return <option key={index} value={role.id} id={role.id}>{role.id} - {role.role}</option>
+            if (this.props.myRole === 2 && role.id === 1) {
+                return;
+            } else{
+                return <option key={index} value={role.id} id={role.id}>{role.id} - {role.role}</option>
+            }
+
+            //  if (this.props.myRole === role.id)
         });
     }
 

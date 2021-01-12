@@ -21,12 +21,14 @@ class Board extends React.Component {
 
 
   componentDidMount() {
+    authServices.loadUserCredentials();
     authServices.getInfo().then(res => {
-      console.log(res);
+      res.success ? this.authorised(res.email, res.role, res.id) : this.notAuthorised();
     });
   }
 
   authorised(email, role, id) {
+    console.log(email, role, id);
     this.setState({ authorised: true, role: role, email: email, id: id });
   }
 

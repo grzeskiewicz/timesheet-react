@@ -30,6 +30,7 @@ class Login extends React.Component {
     login(user) {
         authServices.login(user)
             .then(res => {
+                console.log(res);
                 if (res.success) {
                     authServices.getInfo().then(res2 => {
                         if (res2.success) {
