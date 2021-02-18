@@ -4,7 +4,7 @@ const TRANSLATIONS = [
   { eng: "OFF", pl: "-" },
   { eng: "DAYSHIFT", pl: "Dzienna" },
   { eng: "NIGHTSHIFT", pl: "Nocna" },
-  { eng: "SICK LEAVE", pl: "Chorobowe" },
+  { eng: "SICK LEAVE", pl: "L4" },
   { eng: "HOLIDAY", pl: "Urlop" },
   { eng: "PUBLIC HOLIDAY", pl: "Święto" },
 ]

@@ -11,6 +11,7 @@ export const authServices = {
         console.log(token);
         if (token) {
             this.useCredentials(token);
+            return true;
         }
     },
 
@@ -46,6 +47,7 @@ export const authServices = {
     },
 
     getInfo() {
+        console.log(headers.get('Authorization'));
         return fetch(request(`${API_URL}/userinfo`, 'GET'))
             .then(res => res.json())
             .then(result => result);

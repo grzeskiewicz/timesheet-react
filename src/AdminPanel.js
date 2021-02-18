@@ -7,6 +7,7 @@ import EditUser from './EditUser';
 import CreateSheets from './CreateSheets';
 import UserSheet from './UserSheet';
 import SendEmails from './SendEmails';
+import ReactToPrint from "react-to-print";
 
 
 
@@ -67,7 +68,8 @@ class AdminPanel extends React.Component {
         {this.state.selectedMenu === 1 ?
           <div className="usersContainer">
             {this.state.userList !== '' ? <UserList selectedUser={this.state.selectedUser} userList={this.state.userList} showEdit={this.showEdit}></UserList> : ''}
-            {this.state.selectedUser !== '' ? <UserSheet key={this.state.selectedUser.id} user={this.state.selectedUser} /> : ''}
+            {this.state.selectedUser !== '' ? <UserSheet key={this.state.selectedUser.id} user={this.state.selectedUser} ref={(el) => (this.componentRef = el)} /> : ''}
+            {this.state.selectedUser !== '' ? <ReactToPrint trigger={() => <div><button>Drukuj listę</button></div>} content={() => this.componentRef} /> : ''}
             {this.state.selectedUser !== '' && this.state.selectedUser.role !== 1 ? <EditUser myRole={this.props.role} clearSelectedUser={this.clearSelectedUser} selectedUser={this.state.selectedUser} updateSelectedUser={this.getUserList}></EditUser> : ''}
           </div> : ''}
 

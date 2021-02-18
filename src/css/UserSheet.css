@@ -21,7 +21,7 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   text-align: center;
-  table-layout: auto;
+  table-layout: fixed;
   width: 100%;
 }
 
@@ -29,6 +29,13 @@ table td,
 table th {
   border: 1px solid #333;
   padding: 0;
+  line-height: 1.5rem;
+}
+
+
+.signature-cell img {
+  width: 100%;
+  height: auto;
 }
 
 .weekend.ph {

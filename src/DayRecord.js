@@ -13,7 +13,7 @@ class DayRecord extends React.Component {
       timeStart: this.props.record.start === null ? null : new Date(this.props.record.start),
       timeFinish: this.props.record.finish === null ? null : new Date(this.props.record.finish),
       disabled: true,
-      status: ''
+      status: this.props.record.status
     }
     this.changeTimeStart = this.changeTimeStart.bind(this);
     this.changeTimeFinish = this.changeTimeFinish.bind(this);
@@ -44,6 +44,7 @@ class DayRecord extends React.Component {
     const timeFinish = this.state.timeFinish === null ? null : `${date} ${this.state.timeFinish}`;
 
     const sickOrHoliday = Number(this.state.status) === 4 || Number(this.state.status) === 5;
+    console.log(this.state.status);
     const toUpdate = {
       id: this.props.record.id,
       start: sickOrHoliday ? null : timeStart,
@@ -55,7 +56,8 @@ class DayRecord extends React.Component {
       this.setState({ disabled: true });
       return;
     }
-    
+
+    console.log(toUpdate);
     fetch(request(`${API_URL}/sethours`, 'POST', toUpdate))
       .then(res => res.json())
       .then(result => {
@@ -68,7 +70,11 @@ class DayRecord extends React.Component {
   }
 
   handleStatusChange(e) {
-    this.setState({ status: e.target.value });
+    if (Number(e.target.value) === 4 || Number(e.target.value) === 5) {
+      this.setState({ status: e.target.value, timeStart: null, timeFinish: null })
+    } else {
+      this.setState({ status: undefined });
+    }
   }
 
   render() {
@@ -84,9 +90,9 @@ class DayRecord extends React.Component {
         <td><TimePicker disabled={this.state.disabled} disableClock={true} clearIcon={null} format="HH:mm" value={this.state.timeFinish} onChange={this.changeTimeFinish}></TimePicker></td>
         <td>{!this.state.disabled ?
           <select onChange={this.handleStatusChange} value={this.state.status}>
-            <option key={3} value={10}>Urlop / Chorobowe?</option>
+            <option key={3} value={10}>Urlop / L4?</option>
             <option key={4} value={4}>Urlop</option>
-            <option key={5} value={5}>Chorobowe</option>
+            <option key={5} value={5}>L4</option>
           </select>
           : record.state}</td>
         <td>{!this.state.disabled ? <FontAwesomeIcon onClick={this.setHours} icon={faCheckCircle} size="lg" /> : <FontAwesomeIcon icon={faEdit} size="lg" onClick={() => this.setState({ disabled: !this.state.disabled })} />}</td>

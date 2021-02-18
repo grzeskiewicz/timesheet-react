@@ -1,6 +1,7 @@
 import React from 'react';
 import { API_URL, request } from './apiConnection.js';
 import UserForm from './UserForm';
+import SignatureUpload from './SignatureUpload';
 import './css/EditUser.css';
 
 
@@ -31,19 +32,19 @@ class EditUser extends React.Component {
             }).catch(error => Promise.reject(new Error(error)));
     }
 
-/*
-    blockUser() {
-        fetch(request(`${API_URL}/block`, 'POST', { user: this.props.selectedUser.id }))
-            .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    this.props.updateSelectedUser();
-                } else {
-                    this.props.updateSelectedUser();
-
-                }
-            }).catch(error => Promise.reject(new Error(error)));
-    } */
+    /*
+        blockUser() {
+            fetch(request(`${API_URL}/block`, 'POST', { user: this.props.selectedUser.id }))
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        this.props.updateSelectedUser();
+                    } else {
+                        this.props.updateSelectedUser();
+    
+                    }
+                }).catch(error => Promise.reject(new Error(error)));
+        } */
 
     deleteUser() {
         const user = this.props.selectedUser;
@@ -70,6 +71,7 @@ class EditUser extends React.Component {
                     <button type='submit'>Edytuj</button>
                 </UserForm>
                 <button onClick={this.deleteUser}>Usuń użytkownika</button>
+                <SignatureUpload user={this.props.selectedUser.id} signature={this.props.selectedUser.signature}></SignatureUpload>
             </div>
 
         );

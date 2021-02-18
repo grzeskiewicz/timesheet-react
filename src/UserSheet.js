@@ -1,7 +1,9 @@
 import React from 'react';
 import './css/UserSheet.css';
 import Summary from './Summary';
-import { getUserSheet, MONTH_LIST } from './SheetUtils'
+import { getUserSheet, MONTH_LIST } from './SheetUtils';
+import { API_URL } from './apiConnection.js';
+
 
 class UserSheet extends React.Component {
     constructor(props) {
@@ -38,6 +40,7 @@ class UserSheet extends React.Component {
     renderSheet() {
         if (this.state.sheet !== '') {
             return this.state.sheet.map((record, index) => {
+                console.log(record);
                 const start = new Date(record.start);
                 const finish = new Date(record.finish);
                 const startTime = start.getHours() + ':' + (start.getMinutes() < 10 ? '0' : '') + start.getMinutes();
@@ -46,7 +49,14 @@ class UserSheet extends React.Component {
                 const dateDMY = new Date(`${new Date().getFullYear()}-${record.month}-${record.day}`);
                 const isWeekend = dateDMY.getDay() === 6 || dateDMY.getDay() === 0;
                 const isPublicHoliday = record.ispublicholiday;
-                return <tr className={(isWeekend ? "weekend " : "") + (isPublicHoliday ? "ph " : "")} key={index}><td>{record.day}</td><td>{record.start === null ? '-' : startTime}</td><td>{record.finish === null ? '-' : finishTime}</td><td>{record.state}</td></tr>
+                return <tr className={(isWeekend ? "weekend " : "") + (isPublicHoliday ? "ph " : "")} key={index}>
+                    <td>{record.day}</td><td>{record.start === null ? '-' : startTime}</td>
+                    <td>{record.finish === null ? '-' : finishTime}</td>
+                    <td>{record.state}</td>
+                    <td className="signature-cell">
+                        {record.state !== "-" ? <img src={`${API_URL}/${this.props.user.signature}`} alt="Podpis"></img> : ''}
+                    </td>
+                </tr>
             });
         }
     }
@@ -93,14 +103,14 @@ class UserSheet extends React.Component {
                         <thead>
                             <tr>
                             </tr>
-                            <tr><td>Dzień</td><td>Od</td><td>Do</td><td>Status</td></tr>
+                            <tr><td>Dzień</td><td>Od</td><td>Do</td><td>Status</td><td>Podpis</td></tr>
                         </thead>
                         <tbody>
                             {sheet}
                         </tbody>
-                    </table>    
+                    </table>
                     : "Brak listy na podany miesiąc."
-            }
+                }
 
                 { this.state.grouped !== '' && this.state.sheet.length > 0 ? <Summary user={this.props.user} summary={this.state.summary} data={this.state.grouped}></Summary> : ''}
             </div >
