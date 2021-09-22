@@ -19,11 +19,10 @@ class DayRecord extends React.Component {
     this.changeTimeFinish = this.changeTimeFinish.bind(this);
     this.setHours = this.setHours.bind(this);
     this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.focus = this.focus.bind(this);
   }
 
-  componentDidMount() {
-
-  }
   sendTime(e) {
     console.log(e.key)
   }
@@ -77,16 +76,29 @@ class DayRecord extends React.Component {
     }
   }
 
+
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.setHours();
+    }
+  }
+
+
+  focus() {
+    console.log(this.node);
+    //this.node.props.autoFocus = true;
+  }
+
   render() {
-    console.log(this.state.status);
+    if (!this.state.disabled) this.focus();
     const record = this.props.record;
     const date = new Date(`${new Date().getFullYear()}-${record.month}-${record.day}`);
     const isWeekend = date.getDay() === 6 || date.getDay() === 0;
     const isPublicHoliday = record.ispublicholiday;
     return (
-      <tr className={"DayRecord " + (isWeekend ? "weekend " : "") + (isPublicHoliday ? "ph " : "") + (!this.state.disabled ? "selected" : "")}>
+      <tr onKeyPress={this.handleKeyPress} className={"DayRecord " + (isWeekend ? "weekend " : "") + (isPublicHoliday ? "ph " : "") + (!this.state.disabled ? "selected" : "")}>
         <td>{record.day}</td>
-        <td><TimePicker disabled={this.state.disabled} disableClock={true} clearIcon={null} format="HH:mm" value={this.state.timeStart} onChange={this.changeTimeStart}></TimePicker></td>
+        <td><TimePicker ref={node => this.node = node} disabled={this.state.disabled} disableClock={true} clearIcon={null} format="HH:mm" value={this.state.timeStart} onChange={this.changeTimeStart}></TimePicker></td>
         <td><TimePicker disabled={this.state.disabled} disableClock={true} clearIcon={null} format="HH:mm" value={this.state.timeFinish} onChange={this.changeTimeFinish}></TimePicker></td>
         <td>{!this.state.disabled ?
           <select onChange={this.handleStatusChange} value={this.state.status}>

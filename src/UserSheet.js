@@ -3,6 +3,7 @@ import './css/UserSheet.css';
 import Summary from './Summary';
 import { getUserSheet, MONTH_LIST } from './SheetUtils';
 import { API_URL } from './apiConnection.js';
+import ReactToPrint from "react-to-print";
 
 
 class UserSheet extends React.Component {
@@ -25,6 +26,7 @@ class UserSheet extends React.Component {
 
 
     updateSheet(month, year) {
+        console.log("UPDATE")
         const user = {
             id: this.props.user.id,
             month: month || this.state.selectedMonth,
@@ -32,7 +34,6 @@ class UserSheet extends React.Component {
         }
         console.log(user);
         getUserSheet(user).then(result => {
-            console.log(result);
             this.setState({ grouped: result.grouped, sheet: result.sheet, selectedMonth: user.month, selectedYear: user.year, summary: result.summary });
         });
     }
@@ -40,7 +41,7 @@ class UserSheet extends React.Component {
     renderSheet() {
         if (this.state.sheet !== '') {
             return this.state.sheet.map((record, index) => {
-                console.log(record);
+                //   console.log(record);
                 const start = new Date(record.start);
                 const finish = new Date(record.finish);
                 const startTime = start.getHours() + ':' + (start.getMinutes() < 10 ? '0' : '') + start.getMinutes();
@@ -81,13 +82,62 @@ class UserSheet extends React.Component {
         this.updateSheet(new Date().getMonth() + 1, new Date().getFullYear());
     }
 
+    printStyle = `
+  @page { 
+    margin:5rem;
+    
+  }
+
+  table{
+  }
+  #month-selected {
+flex:1 100%;
+    text-align:center; 
+    float:center;
+   }
+#month-selection{
+  display:none;
+}
+
+#user-year-selection span{
+display:none;
+}
+  .Summary{
+    width:50%;
+  }
+
+  #summary-accept {
+    display:none;
+  }
+
+  .container svg {
+    display:none;
+  }
+
+  #print-sheet{
+      display:none;
+  }
+
+  @media all {
+    .pagebreak {
+      display: none;
+    }
+  }
+
+  @media print {
+    .pagebreak {
+      page-break-before: always;
+    }
+  }
+`;
+
+
     render() {
         const sheet = this.renderSheet();
         const renderMonths = this.renderMonths();
         const year = this.state.selectedYear;
-        console.log(this.state.sheet);
         return (
-            <div className={"userSheet" + (this.props.user.role === 1 || this.props.user.role === 2 ? " admin" : " user")}>
+            <div className={"userSheet" + (this.props.user.role === 1 || this.props.user.role === 2 ? " admin" : " user")} ref={(el) => (this.componentRef = el)} >
 
                 <div id="user-year-selection">
                     {year === new Date().getFullYear() ? <span onClick={this.prevYear}>{'<<'}</span> : ''}
@@ -98,6 +148,7 @@ class UserSheet extends React.Component {
                 <select id="month-selection" onChange={this.handleMonthSelection} value={this.state.selectedMonth}>
                     {renderMonths}
                 </select>
+                <p id="month-selected">{MONTH_LIST[this.state.selectedMonth - 1]}</p>
                 {this.state.sheet.length > 0 ?
                     <table>
                         <thead>
@@ -112,7 +163,8 @@ class UserSheet extends React.Component {
                     : "Brak listy na podany miesiąc."
                 }
 
-                { this.state.grouped !== '' && this.state.sheet.length > 0 ? <Summary user={this.props.user} summary={this.state.summary} data={this.state.grouped}></Summary> : ''}
+                {this.state.grouped !== '' && this.state.sheet.length > 0 ? <Summary user={this.props.user} summary={this.state.summary} data={this.state.grouped}></Summary> : ''}
+                <ReactToPrint pageStyle={this.printStyle} trigger={() => <div id="print-sheet"><button>Drukuj listę</button></div>} content={() => this.componentRef} />
             </div >
         );
     }

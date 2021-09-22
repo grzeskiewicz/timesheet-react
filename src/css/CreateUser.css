@@ -1,20 +1,30 @@
-.wrapper{
+.wrapper {
   display: flex;
-  flex:0 50%;
-  justify-content: center;
+  margin:0 3rem;
 }
 .createUser {
-    display: flex;
-    flex-flow: column nowrap;
-    flex:0 20%;
-    justify-content: space-around;
-  }
+  display: flex;
+  flex:0 20%;
+}
 
-  .createUser > * {
-    flex:0 10%;
-  }
-  
+.createUser div {
+  flex: 1;
+}
 
-.createUser select{
-  
+.createUser div > * {
+  width: 100%;
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.createUser div button {
+  width: 50%;
+  margin-top: 1rem;
+}
+
+.createUser > * {
+  /*  flex:0 10%;*/
+}
+
+.createUser select {
 }

@@ -11,8 +11,7 @@ const TRANSLATIONS_DEALS = [
     { eng: "FULLTIME", pl: "Etat" },
     { eng: "SERVICE", pl: "Serwisant" },
     { eng: "B2B", pl: "B2B" },
-    { eng: "CONTRACT", pl: "Umowa zlecenie" },
-
+    { eng: "CONTRACT", pl: "Umowa zlecenie" }
 ]
 
 class UserForm extends React.Component {
@@ -125,8 +124,8 @@ class UserForm extends React.Component {
         return this.state.roles.map((role, index) => {
             if (this.props.myRole === 1) return <option key={index} value={role.id} id={role.id}>{role.id} - {role.role}</option>
             if (this.props.myRole === 2 && role.id === 1) {
-                return;
-            } else{
+                return 
+            } else {
                 return <option key={index} value={role.id} id={role.id}>{role.id} - {role.role}</option>
             }
 
@@ -152,18 +151,20 @@ class UserForm extends React.Component {
         const isUserEdit = this.props.userData !== undefined;
         return (
             <form className={this.props.className} onSubmit={this.submitForm}>
-                <input placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
-                {!isUserEdit ? <input type="password" placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input> : ''}
-                <input placeholder='Imię' value={this.state.name} onChange={this.handleName} required></input>
-                <input placeholder='Nazwisko' value={this.state.surname} onChange={this.handleSurname} required></input>
-                <select onChange={this.handleRole} value={this.state.role}>
-                    {mappedRoles}
-                </select>
-                <select onChange={this.handleDeal} value={this.state.deal}>
-                    {mappedDeals}
-                </select>
-                {this.props.children}
-                {this.state.error !== '' ? <p className="error">{this.state.error}</p> : ''}
+                <div>
+                    <input placeholder='E-mail' value={this.state.email} onChange={this.handleEmail} required></input>
+                    {!isUserEdit ? <input type="password" placeholder='Hasło' value={this.state.password} onChange={this.handlePassword} required={!isUserEdit}></input> : ''}
+                    <input placeholder='Imię' value={this.state.name} onChange={this.handleName} required></input>
+                    <input placeholder='Nazwisko' value={this.state.surname} onChange={this.handleSurname} required></input>
+                    <select onChange={this.handleRole} value={this.state.role}>
+                        {mappedRoles}
+                    </select>
+                    <select onChange={this.handleDeal} value={this.state.deal}>
+                        {mappedDeals}
+                    </select>
+                    {this.props.children}
+                    {this.state.error !== '' ? <p className="error">{this.state.error}</p> : ''}
+                </div>
             </form>
         );
     }
@@ -171,4 +172,4 @@ class UserForm extends React.Component {
 
 
 
-export default UserForm;   
+export default UserForm;

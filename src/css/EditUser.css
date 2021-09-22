@@ -1,11 +1,47 @@
-.editUser {
-  display: flex;
-  flex-flow: column nowrap;
+#edit-user{
   flex:0 20%;
-  
 }
 
-.editUser > * {
-  flex:0 4%;
-  margin-bottom: 0.6rem;
+#edit-user > * {
+  margin-bottom:0.5rem;
+}
+
+.editUser {
+  display: flex;
+}
+
+.editUser div {
+  fleX:1;
+}
+.editUser div > * {
+  width:100%;
+  padding:0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.editUser div button {
+  width:50%;
+  margin-top:1rem;
+}
+
+#signature form > *{
+  margin-bottom: 0.4rem;
+
+}
+
+#signature form button{
+  padding:0.4rem;
+}
+
+fieldset{
+  border:1px solid rgb(192,192,192)
+}
+
+legend{
+  font-size: 0.9rem;
+}
+
+
+#delete-user-btn{
+  padding:0.4rem;
 }

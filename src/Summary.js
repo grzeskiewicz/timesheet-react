@@ -23,6 +23,7 @@ class Summary extends React.Component {
 
 
     renderSummary(data) {
+        console.log(data);
         const render = Object.keys(data).map((elem, index) => {
             return <p key={index}><span>{elem}</span><span>{data[elem].length}</span></p>
         })
@@ -63,7 +64,7 @@ class Summary extends React.Component {
         const data = this.props.data;
         const render = this.renderSummary(data);
         return (
-            <div className={"Summary"}>
+            <div className={"Summary " + this.props.className}>
                 {render}
                 {this.props.user.role === 3 ?
                     <form id="update-summary-form" onSubmit={this.updateSummary}>
@@ -83,7 +84,7 @@ class Summary extends React.Component {
                             <label id="overtime">Nadgodziny</label>
                             {!this.state.showOvertimeEdit ?
                                 <div className="container">
-                                    <p>{this.state.overtime}</p><FontAwesomeIcon icon={faEdit} size="lg" onClick={this.toggleOverTimeEdit} />
+                                    <p>{this.state.overtime}</p><FontAwesomeIcon  icon={faEdit} size="lg" onClick={this.toggleOverTimeEdit} />
                                 </div> :
                                 <div className="container">
                                     <input maxLength="3" size="4" type="text" name="overtime" value={this.state.overtime} onChange={this.handleOvertime}></input>
@@ -92,7 +93,7 @@ class Summary extends React.Component {
                             }
 
                         </div>
-                        <button type="submit">Akceptuj</button>
+                        <button id="summary-accept" type="submit">Akceptuj</button>
                     </form> : ''}
             </div>
         );

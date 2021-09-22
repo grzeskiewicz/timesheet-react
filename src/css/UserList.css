@@ -1,5 +1,5 @@
 .userList {
-    flex:0 15%;
+    flex:0 10%;
     align-content: stretch;
     display: flex;
     flex-flow: column;
@@ -9,12 +9,8 @@
 
 .user {
     border:1px solid #333;
-    padding:0.1rem;
     cursor: pointer;
-    flex-basis:5%;
-    display: flex;
-    flex-flow:column;
-    justify-content: center;
+
 }
 
 .user p {

@@ -66,11 +66,14 @@ class EditUser extends React.Component {
 
     render() {
         return (
-            <div>
-                <UserForm myRole={this.props.myRole} className="editUser" key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
-                    <button type='submit'>Edytuj</button>
-                </UserForm>
-                <button onClick={this.deleteUser}>Usuń użytkownika</button>
+            <div id="edit-user">
+                <fieldset>
+                    <legend>Pracownik</legend>
+                    <UserForm myRole={this.props.myRole} className="editUser" key={this.props.selectedUser.id} userToEdit={this.userToEdit} userData={this.props.selectedUser}>
+                        <button type='submit'>Edytuj</button>
+                    </UserForm>
+                    <button id="delete-user-btn" onClick={this.deleteUser}>Usuń użytkownika</button>
+                </fieldset>
                 <SignatureUpload user={this.props.selectedUser.id} signature={this.props.selectedUser.signature}></SignatureUpload>
             </div>
 

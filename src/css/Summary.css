@@ -1,21 +1,25 @@
-.Summary {
+.Summary.userPanel {
+  width: 30%;
+  margin-top:1rem;
 }
 .Summary p,
 #update-summary-form > div {
-margin:0;
-    display: flex;
-  flex-flow:row nowrap;
+  margin: 0;
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
   border-bottom: 1px solid slategray;
 }
 
 #update-summary-form .container {
-display: flex;
-flex-flow:row nowrap;
-margin:0;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
 }
 
-#update-summary-form .container p{margin:0;}
+#update-summary-form .container p {
+  margin: 0;
+}
 
 .Summary .admin {
   cursor: default;

@@ -21,7 +21,9 @@ export const getUserSheet = (user) => {
         .then(res2 => res2.json())
         .then(result2 => {
           const translated = translate(result);
+          //console.log(translated);
           const grouped = groupByState(translated);
+          //  console.log(grouped);
           return { sheet: translated, grouped: grouped, summary: result2 };
         }).catch(error => Promise.reject(new Error(error)));
     }).catch(error => Promise.reject(new Error(error)));
@@ -32,6 +34,7 @@ export const getUserSheet = (user) => {
 export const translate = (sheet) => {
   for (const day of sheet) {
     const dayState = (TRANSLATIONS.filter(element => element.eng === day.state))[0].pl;
+    console.log(day, dayState)
     day.state = dayState;
   }
   return sheet;
@@ -46,6 +49,11 @@ export const groupByState = (sheet) => {
   for (const day of sheetCopy) {
     if (stateGrouped[day.state] === undefined) stateGrouped[day.state] = [];
     stateGrouped[day.state].push(day);
+    console.log(day);
+    if (day.ispublicholiday === 1) stateGrouped["Święto"].push(day);
+
   }
+
+  console.log(stateGrouped);
   return stateGrouped;
 }

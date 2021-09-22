@@ -93,7 +93,7 @@ class UserPanel extends React.Component {
               {sheet}
             </tbody>
           </table>
-          <Summary data={this.state.grouped} user={this.props.user} summary={this.state.summary}></Summary>
+          <Summary className="userPanel" data={this.state.grouped} user={this.props.user} summary={this.state.summary}></Summary>
         </div>
       </div>
     );
